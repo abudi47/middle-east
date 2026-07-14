@@ -165,7 +165,7 @@ export function Footer() {
               reserved.
               <span className="hidden sm:inline"> · </span>
               <span className="mt-1 block sm:mt-0 sm:inline">
-                Developed by Yabets Workaferahu
+                Developed by AB Software Solutions
               </span>
             </p>
             <p className="text-xs font-medium uppercase tracking-wide text-gold-soft/80">
