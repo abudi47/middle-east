@@ -1,0 +1,4 @@
+/** Re-mounts on every navigation, replaying a short CSS enter animation. */
+export default function Template({ children }: { children: React.ReactNode }) {
+  return <div className="animate-page-in">{children}</div>;
+}

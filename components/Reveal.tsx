@@ -16,9 +16,11 @@ export function Reveal({
   delay = 0,
   y = 24,
   className = "",
+  as = "div",
 }: RevealProps) {
+  const Component = motion[as];
   return (
-    <motion.div
+    <Component
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +28,7 @@ export function Reveal({
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </Component>
   );
 }
 

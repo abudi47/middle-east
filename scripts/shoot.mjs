@@ -9,7 +9,8 @@ const CHROME =
 const pages = [
   { name: "home", path: "/" },
   { name: "services", path: "/services" },
-  { name: "sectors", path: "/sectors" },
+  { name: "products", path: "/products" },
+  { name: "portfolio", path: "/portfolio" },
   { name: "about", path: "/about" },
   { name: "contact", path: "/contact" },
 ];

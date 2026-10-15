@@ -1,27 +1,55 @@
 import {
-  Monitor,
+  Cpu,
   HardHat,
   Wheat,
   Landmark,
-  Building2,
+  Gavel,
   GraduationCap,
-  Truck,
+  Building2,
   HeartHandshake,
-  Briefcase,
+  Factory,
+  BadgeCheck,
+  Wrench,
+  Truck,
+  Scale,
+  Layers,
+  MapPinned,
+  Coins,
+  Smartphone,
+  Tablet,
+  Laptop,
+  Tv,
+  Watch,
+  Printer,
+  LayoutGrid,
   type LucideIcon,
 } from "lucide-react";
 
 export const serviceIcons: Record<string, LucideIcon> = {
-  "information-technology-ecommerce": Monitor,
-  "industrial-construction-support": HardHat,
-  "agricultural-supply-chain": Wheat,
+  "ict-digital-hardware": Cpu,
+  "industrial-construction": HardHat,
+  "agri-commodities-supply-chain": Wheat,
 };
 
 export const partnerIcons: Record<string, LucideIcon> = {
-  "Government Offices": Landmark,
-  "Supreme Courts & Justice Bureaus": Building2,
+  "Federal Commissions": Landmark,
+  "Supreme Courts & Justice Bureaus": Gavel,
   "Universities & Colleges": GraduationCap,
-  "Construction Enterprises": HardHat,
-  "NGOs & Humanitarian Agencies": HeartHandshake,
-  "Private Institutions": Briefcase,
+  "Regional Bureaus": Building2,
+  "International NGOs": HeartHandshake,
+  "Construction & Agri Projects": Factory,
+};
+
+export const commitmentIcons: LucideIcon[] = [BadgeCheck, Wrench, Truck, Scale];
+
+export const whyPartnerIcons: LucideIcon[] = [Layers, MapPinned, Coins];
+
+export const productCategoryIcons: Record<string, LucideIcon> = {
+  All: LayoutGrid,
+  Smartphones: Smartphone,
+  Tablets: Tablet,
+  Laptops: Laptop,
+  "TVs & Displays": Tv,
+  "Wearables & Storage": Watch,
+  "Office & Infrastructure": Printer,
 };

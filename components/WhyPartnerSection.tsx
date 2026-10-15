@@ -1,36 +1,56 @@
-import { Stagger, StaggerItem } from "./Reveal";
-import { whyPartner } from "@/lib/content";
+import { SectionHeading } from "./SectionHeading";
+import { Reveal, Stagger, StaggerItem } from "./Reveal";
+import { Aurora } from "./Aurora";
+import { RegionsMap } from "./RegionsMap";
+import { whyPartnerIcons } from "@/lib/icons";
+import { accentStyles } from "@/lib/accent";
+import { whyPartnerSection, whyPartner } from "@/lib/content";
 
 export function WhyPartnerSection() {
   return (
-    <section className="border-b border-slate-200 bg-white py-20 md:py-28">
-      <div className="container-x">
-        <div className="mb-12 max-w-xl">
-          <p className="eyebrow">Why Partner With Us</p>
-          <h2 className="mt-2 text-2xl font-bold text-navy-deep md:text-3xl">
-            Seven reasons institutions choose a single-source supplier
-          </h2>
+    <section className="relative overflow-hidden bg-navy-ink py-20 text-white md:py-28">
+      <Aurora className="opacity-60" />
+      <div className="container-x relative grid items-center gap-14 lg:grid-cols-12">
+        <div className="lg:col-span-6">
+          <SectionHeading
+            eyebrow={whyPartnerSection.eyebrow}
+            title={whyPartnerSection.title}
+            tone="light"
+            className="mb-10"
+          />
+          <Stagger className="space-y-4">
+            {whyPartner.map((item, i) => {
+              const Icon = whyPartnerIcons[i];
+              const accent = accentStyles[item.accent];
+              return (
+                <StaggerItem key={item.title}>
+                  <div className="group flex gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.07]">
+                    <span
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${accent.bg} text-white transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110`}
+                    >
+                      <Icon className="h-6 w-6" strokeWidth={1.8} />
+                    </span>
+                    <div>
+                      <h3 className={`text-lg font-bold ${accent.textOnDark}`}>
+                        {item.title}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-slate-300">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                </StaggerItem>
+              );
+            })}
+          </Stagger>
         </div>
 
-        <Stagger className="divide-y divide-slate-200 border border-slate-200">
-          {whyPartner.map((item, i) => (
-            <StaggerItem key={item.title}>
-              <div className="grid gap-4 bg-white p-6 md:grid-cols-12 md:items-start md:gap-8 md:p-8">
-                <span className="text-sm font-bold text-gold md:col-span-1">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="md:col-span-11">
-                  <h3 className="text-base font-bold text-navy-deep md:text-lg">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {item.text}
-                  </p>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <Reveal delay={0.1} className="lg:col-span-6">
+          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-brand text-slate-400">
+            Operational footprint · tap a location
+          </p>
+          <RegionsMap />
+        </Reveal>
       </div>
     </section>
   );

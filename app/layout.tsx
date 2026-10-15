@@ -1,8 +1,25 @@
 import type { Metadata } from "next";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Providers } from "@/components/Providers";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { BackToTop } from "@/components/BackToTop";
 import { company } from "@/lib/content";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -10,9 +27,11 @@ export const metadata: Metadata = {
     template: `%s | ${company.fullName}`,
   },
   description:
-    "Middle East Business is a registered multi-sector supplier for governmental, public, and institutional procurement across Ethiopia — ICT, construction, industrial, and agricultural supply.",
+    "Middle East Business PLC is a registered multi-sector supplier for governmental, public, and non-governmental procurement across Ethiopia — Samsung devices and ICT hardware, industrial & construction supply, and agri-commodities.",
   keywords: [
     "Ethiopia procurement",
+    "Samsung supplier Ethiopia",
+    "Samsung Galaxy Tab Ethiopia",
     "IT equipment supply Ethiopia",
     "public tender Ethiopia",
     "Middle East Business",
@@ -32,11 +51,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="overflow-x-hidden">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          <ScrollProgress />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <BackToTop />
+        </Providers>
       </body>
     </html>
   );

@@ -5,15 +5,29 @@ import { animate, useInView } from "framer-motion";
 
 type CounterProps = {
   value: number;
+  prefix?: string;
   suffix?: string;
+  decimals?: number;
   duration?: number;
 };
 
-export function Counter({ value, suffix = "", duration = 1.6 }: CounterProps) {
+export function Counter({
+  value,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+  duration = 1.6,
+}: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px", amount: 0.35 });
   const [display, setDisplay] = useState(0);
   const [done, setDone] = useState(false);
+
+  const format = (n: number) =>
+    n.toLocaleString("en-US", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
 
   useEffect(() => {
     const reduce =
@@ -32,7 +46,7 @@ export function Counter({ value, suffix = "", duration = 1.6 }: CounterProps) {
     const controls = animate(0, value, {
       duration,
       ease: [0.22, 1, 0.36, 1],
-      onUpdate: (latest) => setDisplay(Math.round(latest)),
+      onUpdate: (latest) => setDisplay(latest),
       onComplete: () => {
         setDisplay(value);
         setDone(true);
@@ -62,8 +76,9 @@ export function Counter({ value, suffix = "", duration = 1.6 }: CounterProps) {
   }, [done, inView, value]);
 
   return (
-    <span ref={ref}>
-      {display}
+    <span ref={ref} className="tabular-nums">
+      {prefix}
+      {format(display)}
       {suffix}
     </span>
   );

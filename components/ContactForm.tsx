@@ -65,8 +65,8 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
 
   if (sent) {
     return (
-      <div className="flex flex-col items-center justify-center border border-teal/25 bg-teal-wash p-12 text-center">
-        <CheckCircle2 className="h-14 w-14 text-teal" strokeWidth={1.5} />
+      <div className="flex flex-col items-center justify-center rounded-3xl border border-jade/25 bg-jade-wash p-12 text-center">
+        <CheckCircle2 className="h-14 w-14 text-jade" strokeWidth={1.5} />
         <h3 className="mt-5 font-display text-2xl font-semibold text-navy-deep">
           Thank you, {fields.name.split(" ")[0]}.
         </h3>
@@ -99,7 +99,7 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className={embedded ? "" : "border border-navy/10 bg-white p-8 shadow-card md:p-10"}
+      className={embedded ? "" : "rounded-3xl border border-navy/10 bg-white p-8 shadow-card md:p-10"}
     >
       <Field
         label="Full Name"
@@ -147,7 +147,7 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
           id="objective"
           value={fields.objective}
           onChange={update("objective")}
-          className="rounded-brand border border-navy/15 bg-mist/50 px-4 py-3 text-sm text-navy-deep outline-none transition-colors focus:border-accent-text focus:bg-white"
+          className="rounded-xl border border-navy/15 bg-mist/50 px-4 py-3 text-sm text-navy-deep outline-none transition-colors focus:border-accent-text focus:bg-white"
         >
           {objectives.map((opt) => (
             <option key={opt} value={opt}>
@@ -159,7 +159,7 @@ export function ContactForm({ embedded = false }: { embedded?: boolean }) {
 
       <button
         type="submit"
-        className="group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-brand bg-navy-deep px-8 py-4 font-label text-xs font-semibold uppercase tracking-[0.14em] text-parchment transition-all duration-300 hover:bg-navy"
+        className="btn-shine group mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-navy-deep px-8 py-4 font-label text-xs font-semibold uppercase tracking-[0.14em] text-parchment transition-all duration-300 hover:bg-navy"
       >
         {contactSection.submitLabel}
         <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -203,7 +203,7 @@ function Field({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`rounded-brand border bg-mist/50 px-4 py-3 text-sm text-navy-deep outline-none transition-colors focus:bg-white ${
+        className={`rounded-xl border bg-mist/50 px-4 py-3 text-sm text-navy-deep outline-none transition-colors focus:bg-white ${
           error
             ? "border-red-500 focus:border-red-600"
             : "border-navy/15 focus:border-accent-text"

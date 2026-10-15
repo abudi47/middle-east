@@ -9,7 +9,7 @@ import { company, nav, services, closingGateway } from "@/lib/content";
 const credentials = [
   { label: "Reg.", value: company.registrationNo },
   { label: "TIN", value: company.tin },
-  { label: "Est.", value: "2016" },
+  { label: "Capital", value: "4,000,000 ETB" },
 ];
 
 export function Footer() {
@@ -33,7 +33,7 @@ export function Footer() {
                   {credentials.map((cred) => (
                     <div
                       key={cred.label}
-                      className="border border-white/15 bg-white/5 px-4 py-2.5"
+                      className="rounded-xl border border-white/15 bg-white/5 px-4 py-2.5"
                     >
                       <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
                         {cred.label}
@@ -76,7 +76,7 @@ export function Footer() {
                 {company.descriptor}
               </p>
               <p className="mt-4 text-sm text-slate-500">
-                Owned and managed by {company.owner}
+                {company.legalName} · Owned and directed by {company.owner}
               </p>
               <Link
                 href="/contact"
@@ -86,7 +86,7 @@ export function Footer() {
               </Link>
             </div>
 
-            <div className="md:col-span-2 md:col-start-6">
+            <div className="md:col-span-2">
               <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-400">
                 Explore
               </h3>
@@ -142,12 +142,17 @@ export function Footer() {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-soft" />
-                  <a
-                    href={`tel:${company.phones[0].tel}`}
-                    className="transition-colors hover:text-white"
-                  >
-                    {company.phones[0].display}
-                  </a>
+                  <span className="flex flex-col gap-1">
+                    {company.phones.map((phone) => (
+                      <a
+                        key={phone.tel}
+                        href={`tel:${phone.tel}`}
+                        className="transition-colors hover:text-white"
+                      >
+                        {phone.display}
+                      </a>
+                    ))}
+                  </span>
                 </li>
                 <li className="border-t border-white/10 pt-3.5 text-slate-400">
                   {company.operationalReach}
