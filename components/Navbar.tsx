@@ -39,81 +39,87 @@ export function Navbar() {
   const solid = scrolled || open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        solid
-          ? "border-b border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <nav className="container-x flex h-[4.5rem] items-center justify-between">
-        <Link
-          href="/"
-          aria-label="Middle East Business home"
-          className="relative z-50"
-        >
-          <Logo tone={solid ? "dark" : "light"} />
-        </Link>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          open
+            ? "border-b border-slate-200/70 bg-white"
+            : scrolled
+              ? "border-b border-slate-200/70 bg-white/85 shadow-sm backdrop-blur-xl"
+              : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <nav className="container-x flex h-[4.5rem] items-center justify-between">
+          <Link
+            href="/"
+            aria-label="Middle East Business home"
+            className="relative z-50"
+          >
+            <Logo tone={solid ? "dark" : "light"} />
+          </Link>
 
-        <ul
-          className={`hidden items-center gap-1 rounded-full p-1 lg:flex ${
-            solid ? "" : "bg-white/5 ring-1 ring-white/10 backdrop-blur-sm"
-          }`}
-        >
-          {nav.map((item) => {
-            const active = isActive(pathname, item.href);
-            return (
-              <li key={item.href} className="relative">
-                {active && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    className={`absolute inset-0 rounded-full ${
-                      solid ? "bg-accent-wash" : "bg-white/15"
+          <ul
+            className={`hidden items-center gap-1 rounded-full p-1 lg:flex ${
+              solid ? "" : "bg-white/5 ring-1 ring-white/10 backdrop-blur-sm"
+            }`}
+          >
+            {nav.map((item) => {
+              const active = isActive(pathname, item.href);
+              return (
+                <li key={item.href} className="relative">
+                  {active && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      className={`absolute inset-0 rounded-full ${
+                        solid ? "bg-accent-wash" : "bg-white/15"
+                      }`}
+                    />
+                  )}
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative block rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                      solid
+                        ? active
+                          ? "text-accent-text"
+                          : "text-charcoal hover:text-accent-text"
+                        : active
+                          ? "text-white"
+                          : "text-slate-200 hover:text-white"
                     }`}
-                  />
-                )}
-                <Link
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`relative block rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    solid
-                      ? active
-                        ? "text-accent-text"
-                        : "text-charcoal hover:text-accent-text"
-                      : active
-                        ? "text-white"
-                        : "text-slate-200 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
 
-        <Link
-          href="/contact"
-          className="btn-shine group hidden items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-white shadow-gold transition-all hover:-translate-y-0.5 hover:bg-gold-dark lg:inline-flex"
-        >
-          Request a Quote
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
+          <Link
+            href="/contact"
+            className="btn-shine group hidden items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-white shadow-gold transition-all hover:-translate-y-0.5 hover:bg-gold-dark lg:inline-flex"
+          >
+            Request a Quote
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className={`relative z-50 -mr-2 inline-flex items-center justify-center rounded-full p-2 transition-colors lg:hidden ${
-            solid ? "text-charcoal" : "text-white"
-          }`}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </nav>
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className={`relative z-50 -mr-2 inline-flex items-center justify-center rounded-full p-2 transition-colors lg:hidden ${
+              solid ? "text-charcoal" : "text-white"
+            }`}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </nav>
+      </header>
 
+      {/* Rendered outside <header>: its backdrop-filter would otherwise become
+          the containing block for this fixed panel and collapse it to 0px. */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -121,7 +127,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[4.5rem] z-40 flex flex-col overflow-y-auto bg-white lg:hidden"
+            className="fixed inset-0 top-[4.5rem] z-[45] flex flex-col overflow-y-auto bg-white lg:hidden"
           >
             <motion.ul
               initial="hidden"
@@ -181,6 +187,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
